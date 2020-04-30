@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/flexible.js"></script>
+    <script src="./js/flexible_css.js"></script>
+    <link rel="stylesheet" href="./css/zsxq.css">
+    <link rel="stylesheet" type="text/css" href="css/cui.css"/>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <title>淘乐课</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="zszp" v-for="(item,index) in lx" :key="index">
+            <img :src="item.zsimg" v-show="currentIndex==item.id" alt="">
+        </div>
+        <div class="zs-title" v-for="(item,index) in list" >
+            <div class="zs-name" v-cloak>{{item.c_name}}</div>
+            <div class="zs-gg" >
+                <div>{{item.c_value}}</div>
+                <div v-if="item.cid == 1" v-cloak>邮费：￥{{item.y_money/100}}</div>
+                <div v-if="item.cid != 1" v-cloak>包邮：￥{{item.money/100}}</div>
+            </div>
+        </div>
+        <div class="zsxq" v-for="(item,index) in lx" v-show="currentIndex==item.id">
+            <div>产品详情</div>
+            <div v-cloak>{{item.xq}}</div>
+            <img :src="item.xqimg" alt="">
+            <div class="ljlq" @click="ljlq()">立即领取</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/cui.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                currentIndex:0,
+                cid:0,
+                list:[],
+                lx:[{
+                    id:1,
+                    img:'./img/danpinweixuanzhong@2x.png',
+                    xzimg:'./img/danpin@2x.png',
+                    name:'单品',
+                    zsimg:'./img/danpintu.png',
+                    guige:'证书一个',
+                    yf:'6',
+                    xqimg:'./img/danpin.jpg',
+                    xq:'证书由陕西电视台授权发放给各位小演员，以表达对小演员在2020年陕西省少儿春晚节目中的出色表演表示肯定和鼓励。'
+                    
+                },{
+                    id:2,
+                    img:'./img/taopinaweixuanzhong@2x.png',
+                    xzimg:'./img/taopina@2x.png',
+                    name:'套品A',
+                    zsimg:'./img/taopinatu.png',
+                    guige:'证书+相框',
+                    yf:'19.9',
+                    xqimg:'./img/taopina.jpg',
+                    xq:'本套餐包含证书一个和相框一个。证书由陕西电视台授权发放，以鼓励和肯定小演员的出色表演。相框材质为水晶玻璃，照片横竖均可摆放，外框：25.5*33cm，内框是21×28.5cm，四周磨边处理，光滑不割手，背板采用防潮设计，易于存放'
+
+                },{
+                    id:3,
+                    img:'./img/taopinbweixuanzhong@2x.png',
+                    xzimg:'./img/taopinb@2x.png',
+                    name:'套品B',
+                    zsimg:'./img/taopinbtu.jpg',
+                    guige:'证书+奖杯',
+                    yf:'49.9',
+                    xqimg:'./img/taopinb.jpg',
+                    xq:'本套餐包含证书一个和奖杯一个。证书由陕西电视台授权发放，以鼓励和肯定小演员的出色表演。奖杯总高28CM，底座宽为7.5cm，底座材质为黑水晶，其余为树脂。'
+                    
+                },{
+                    id:4,
+                    img:'./img/sanjiantaoweixuanzhong@2x.png',
+                    xzimg:'./img/sanjiantao@2x.png',
+                    name:'三件套',
+                    zsimg:'./img/sanjiantaob.jpg',
+                    guige:'证书+相框+奖杯',
+                    yf:'59.9',
+                    xqimg:'./img/sanjiantao.jpg',
+                    xq:'本套餐包含证书一个和奖杯一个。证书由陕西电视台授权发放，以鼓励和肯定小演员的出色表演。奖杯总高28CM，底座宽为7.5cm，底座材质为黑水晶，其余为树脂。'
+
+                },{
+                    id:5,
+                    img:'./img/kebaoaweixuanzhong@2x.png',
+                    xzimg:'./img/kebaoa@2x.png',
+                    name:'课包A',
+                    zsimg:'./img/kebaoatu.jpg',
+                    guige:'证书+编程课',
+                    yf:'99.9',
+                    xqimg:'./img/kebaoa.jpg',
+                    xq:'本套餐包含证书一个，价值369元的贝尔机器人线上编程课课包1个。证书由陕西电视台授权发放，以鼓励和肯定小演员的出色表演。编程课由贝尔机器人编程中心提供，包含3节课程，利用简单的模块完成动画、游戏、故事的制作，即使不认识英文单词，不会使用键盘也能操作，培养孩子的逻辑思维能力，提高学习主动性，激发创造力。'
+
+                },{
+                    id:6,
+                    img:'./img/kebaobweixuanzhong@2x.png',
+                    xzimg:'./img/kebaob@2x.png',
+                    name:'课包B',
+                    zsimg:'./img/kebaobtu.jpg',
+                    guige:'证书+相框+编程课',
+                    yf:'109.9',
+                    xqimg:'./img/kebaob.jpg',
+                    xq:'本套餐包含证书一个，相框一个以及贝尔机器人线上编程课课包1个。证书由陕西电视台授权发放，以鼓励和肯定小演员的出色表演。相框材质为水晶玻璃，照片横竖均可摆放，外框：25.5*33cm，内框是21×28.5cm，四周磨边处理，光滑不割手，背板采用防潮设计，易于存放。编程课由贝尔机器人编程中心提供，包含3节课程，利用简单的模块完成动画、游戏、故事的制作，即使不认识英文单词，不会使用键盘也能操作，培养孩子的逻辑思维能力，提高学习主动性，激发创造力。'
+                    
+                },{
+                    id:7,
+                    img:'./img/kebaocweixuanzhong@2x.png',
+                    xzimg:'./img/kebaoc@2x.png',
+                    name:'课包C',
+                    zsimg:'./img/kebaoctu.png',
+                    guige:'证书+奖杯+编程课',
+                    yf:'138.9',
+                    xqimg:'./img/kebaoc.jpg',
+                    xq:'本套餐包含证书一个，奖杯一个以及价值369元的贝尔机器人线上编程课课包1个。证书由陕西电视台授权发放，以鼓励和肯定小演员的出色表演。奖杯总高28CM，底座宽为7.5cm，底座材质为黑水晶，其余为树脂。编程课由贝尔机器人编程中心提供，包含3节课程，利用简单的模块完成动画、游戏、故事的制作，即使不认识英文单词，不会使用键盘也能操作，培养孩子的逻辑思维能力，提高学习主动性，激发创造力。'
+
+                },{
+                    id:8,
+                    img:'./img/kebaodweixuanzhong@2x.png',
+                    xzimg:'./img/kebaod@2x.png',
+                    name:'课包D',
+                    zsimg:'./img/kebaodtu.png',
+                    guige:'证书+奖杯+相框+编程课',
+                    yf:'138.9',
+                    xqimg:'./img/kebaod.jpg',
+                    xq:'本套餐包含证书一个，相框一个，奖杯一个以及价值369元的贝尔机器人线上编程课课包1个。证书由陕西电视台授权发放，以鼓励和肯定小演员的出色表演。相框材质为水晶玻璃，照片横竖均可摆放，外框：25.5*33cm，内框是21×28.5cm，四周磨边处理，光滑不割手，背板采用防潮设计，易于存放。奖杯总高28CM，底座宽为7.5cm，底座材质为黑水晶，其余为树脂。编程课由贝尔机器人编程中心提供，课包包含3节课程，利用简单的模块完成动画、游戏、故事的制作，即使不认识英文单词，不会使用键盘也能操作，培养孩子的逻辑思维能力，提高学习主动性，激发创造力。'
+                }]
+            },
+            created: function () {
+                this.currentIndex = JSON.parse(sessionStorage.getItem('cid'))
+                this.cid = JSON.parse(sessionStorage.getItem('cid'))
+                this.spxq()
+            },
+            methods:{
+                // 获取商品详情
+                spxq:function(){
+                var _this = this;
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tpxt/getwyspxq.do',
+                        type: 'POST',
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        data: {
+                            cid:this.cid
+                        },
+                        cache: false,
+                        success: function (ret) {
+                            var ret = JSON.parse(ret);
+                            console.log('1231',ret)
+                            cui.hideload();
+                            if (ret.return_code == '1000') {
+                                _this.list = ret.list
+                            }
+                            else {
+                                cui.toast({title: ret.return_message});
+                            }
+                        },
+                        error: function (ret, err) {
+                            console.log(JSON.stringify(err));
+                            cui.hideload();
+                            cui.toast({title: "网络连接错误，请稍后再试"});
+                        }
+                    });
+                },
+                // 订单提交
+                ljlq:function(){
+                    window.location='tjdd.html'
+                },
+                // 获取 url 参数的值
+                getQueryVariable:function(variable){
+                    let query = window.location.search.substring(1);
+                    let vars = query.split("&");
+                    for (var i=0;i<vars.length;i++) {
+                            let pair = vars[i].split("=");
+                            if(pair[0] == variable){return pair[1];}
+                    }
+                    return(false);
+                },
+            }
+        })
+    }
+</script>
+</html>

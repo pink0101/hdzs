@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script src="./js/flexible.js"></script>
+    <script src="./js/flexible_css.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/cui.css"/>
+    <link rel="stylesheet" href="./css/lzs.css">
+    <title>淘乐课</title>
+</head>
+<body class="bg" >
+    <div id="app">
+        <div class="top">
+            <img class="xyy"  src="./img/img-7.png" alt="">
+        </div>
+        <div class="zs" v-for="(item,index) in list" :key="index">
+            <img class="zs-img"  @click="zsxq(item.cid)" v-show="currentIndex==index" :src="'https://tp.xiniuwangluo.cn' + item.c_url" alt="">
+        </div>
+        <div class="lx" >
+            <div class="item" v-for="(item,index) in list" :key="index" v-on:click='change(index,item.cid,item.c_name,item.money)'>
+                <img class="item-img" :src="currentIndex==index? 'https://tp.xiniuwangluo.cn' +item.c_urlss : 'https://tp.xiniuwangluo.cn' +item.c_urls" alt="lx">
+                <div class="item-name" :class='currentIndex==index?"active":""'>{{item.c_name}}</div>
+                <div class="item-je" :class='currentIndex==index?"active":""'>{{item.money/100 == '0' ? '免费':"￥"+item.money/100}}</div>
+            </div>
+        </div>
+        <div class="ljlq" @click="ljlq()">立即领取</div>
+        <div class="fh" @click="fhsy()">
+            <img class="fh-img" src="./img/fanhuishouye@2x.png" alt="">
+            <div class="fh-name">返回首页</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/cui.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                currentIndex: 0, // 选项卡当前的索引
+                xs_name:'',
+                tel:'',
+                list:[],
+                lx:[{
+                    id:1,
+                    img:'./img/danpinweixuanzhong@2x.png',
+                    xzimg:'./img/danpin@2x.png',
+                    name:'单品',
+                    zsimg:'./img/danpintu.png'
+                },{
+                    id:2,
+                    img:'./img/taopinaweixuanzhong@2x.png',
+                    xzimg:'./img/taopina@2x.png',
+                    name:'套品A',
+                    zsimg:'./img/taopinatu.png'
+                },{
+                    id:3,
+                    img:'./img/taopinbweixuanzhong@2x.png',
+                    xzimg:'./img/taopinb@2x.png',
+                    name:'套品B',
+                    zsimg:'./img/taopinbtu.jpg'
+                    
+                },{
+                    id:4,
+                    img:'./img/sanjiantaoweixuanzhong@2x.png',
+                    xzimg:'./img/sanjiantao@2x.png',
+                    name:'三件套',
+                    zsimg:'./img/sanjiantaob.jpg'
+
+                },{
+                    id:5,
+                    img:'./img/kebaoaweixuanzhong@2x.png',
+                    xzimg:'./img/kebaoa@2x.png',
+                    name:'课包A',
+                    zsimg:'./img/kebaoatu.jpg'
+
+                },{
+                    id:6,
+                    img:'./img/kebaobweixuanzhong@2x.png',
+                    xzimg:'./img/kebaob@2x.png',
+                    name:'课包B',
+                    zsimg:'./img/kebaobtu.jpg'
+                    
+                },{
+                    id:7,
+                    img:'./img/kebaocweixuanzhong@2x.png',
+                    xzimg:'./img/kebaoc@2x.png',
+                    name:'课包C',
+                    zsimg:'./img/kebaoctu.png'
+
+                },{
+                    id:8,
+                    img:'./img/kebaodweixuanzhong@2x.png',
+                    xzimg:'./img/kebaod@2x.png',
+                    name:'课包D',
+                    zsimg:'./img/kebaodtu.png'
+                }]
+            },
+            created: function () {
+                var _this = this;
+                // 获取本地参数
+                this.xs_name = JSON.parse(sessionStorage.getItem('xs_name'))
+                this.tel = JSON.parse(sessionStorage.getItem('tel'))
+                if(!this.xs_name || !this.tel){
+                    window.location='index.html'
+                }
+                _this.spxq()
+                // 给默认值
+                window.sessionStorage.setItem('cid', JSON.stringify(1))
+                window.sessionStorage.setItem('zslx', JSON.stringify('单品'))
+                window.sessionStorage.setItem('money', JSON.stringify(0))
+            },
+            methods:{
+                spxq:function(){
+                var _this = this;
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tpxt/getwysplist.do',
+                        type: 'POST',
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        data: {
+                            xs_name: _this.xs_name,
+                            tel: _this.tel,
+                        },
+                        cache: false,
+                        success: function (ret) {
+                            var ret = JSON.parse(ret);
+                            console.log('1231',ret)
+                            cui.hideload();
+                            if (ret.return_code == '1000') {
+                                _this.list = ret.list
+                            }
+                            else {
+                                cui.toast({title: ret.return_message});
+                            }
+                        },
+                        error: function (ret, err) {
+                            console.log(JSON.stringify(err));
+                            cui.hideload();
+                            cui.toast({title: "网络连接错误，请稍后再试"});
+                        }
+                    });
+                },
+                // 获取 url 参数的值
+                getQueryVariable:function(variable){
+                    let query = window.location.search.substring(1);
+                    let vars = query.split("&");
+                    for (var i=0;i<vars.length;i++) {
+                            let pair = vars[i].split("=");
+                            if(pair[0] == variable){return pair[1];}
+                    }
+                    return(false);
+                },
+                change: function (index,cid,zslx,money) {
+                    // console.log(zslx)
+                    // 改变当前状态
+                    this.currentIndex = index;
+                    window.sessionStorage.setItem('cid', JSON.stringify(cid))
+                    window.sessionStorage.setItem('zslx', JSON.stringify(zslx))
+                    window.sessionStorage.setItem('money', JSON.stringify(money))
+                },
+                // 订单提交
+                ljlq:function(){
+                    // console.log(this.zslx)
+                    window.location='tjdd.html'
+                },
+                // 证书详情
+                zsxq:function(cid) {
+                    // console.log(cid)
+                    window.location='zsxq.html'
+                },
+                fhsy:function(){
+                    window.location='index.html'
+                },
+            }
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <link href="./css/mui.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/cui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css?v=12455544">
+    <link rel="stylesheet" href="css/swiper-3.3.1.min.css">    
+    <style>
+        .china select {
+         min-width: 150px;
+         padding: 5px;
+         border: 1px solid #00ff00;
+     }
+    </style>
+    <title>淘乐课</title>
+</head>
+<body>
+<div class="content" id="app">
+    <div class="audio-menus">
+        <div class="audio-view" type="true"><img src="img/audio.png" alt=""/></div>
+    </div>
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="img/img-1.png"/></div>
+            <div class="swiper-slide"><img src="img/img-2.jpg" style="width: 100%;height: 100%;"/></div>
+            <div class="swiper-slide"><img src="img/img-3.jpg" style="width: 100%;height: 100%;"/></div>
+            <div class="swiper-slide" >
+                <img src="img/img-k.jpg"style="width: 100%;height: 100%;"/>
+                <div class="jchg">
+                    <div class="jchg-title">精彩回顾</div>
+                    <div class="jchg-box">
+                        <img class="jchg-img" @click="bfsp()" src="https://tp.xiniuwangluo.cn/tlk/images/2020shaoerchunwan.png" alt="">
+                        <img class="jchg-img-bf" src="./img/bofanganniu@2x.png" alt="播放">
+                    </div>
+                    <div class="jchg-scorll">
+                        <div class="jchg-scorll-item">
+                            <img class="item-img" src="https://tp.xiniuwangluo.cn/tlk/images/1yue25r.jpg" alt="">
+                            <div class="item-title">播出时间：2020年1月31日</div>
+                            <div class="bfxan">
+                                <img src="./img/bofangshipin@2x.png" alt="">
+                                <div>06:13</div>
+                            </div>
+                        </div>
+                        <div class="jchg-scorll-item">
+                            <img class="item-img" src="https://tp.xiniuwangluo.cn/tlk/images/1yue25r.jpg" alt="">
+                            <div class="item-title">播出时间：2020年1月32日</div>
+                            <div class="bfxan">
+                                <img src="./img/bofangshipin@2x.png" alt="">
+                                <div>06:13</div>
+                            </div>
+                        </div>
+                        <div class="jchg-scorll-item">
+                            <img class="item-img" src="https://tp.xiniuwangluo.cn/tlk/images/1yue25r.jpg" alt="">
+                            <div class="item-title">播出时间：2020年1月33日</div>
+                            <div class="bfxan">
+                                <img src="./img/bofangshipin@2x.png" alt="">
+                                <div>06:13</div>
+                            </div>
+                        </div>
+                        <div class="jchg-scorll-item">
+                            <img class="item-img" src="https://tp.xiniuwangluo.cn/tlk/images/1yue25r.jpg" alt="">
+                            <div class="item-title">播出时间：2020年1月33日</div>
+                            <div class="bfxan">
+                                <img src="./img/bofangshipin@2x.png" alt="">
+                                <div>06:13</div>
+                            </div>
+                        </div>
+                        <div class="jchg-scorll-item">
+                            <img class="item-img" src="https://tp.xiniuwangluo.cn/tlk/images/1yue25r.jpg" alt="">
+                            <div class="item-title">播出时间：2020年1月33日</div>
+                            <div class="bfxan">
+                                <img src="./img/bofangshipin@2x.png" alt="">
+                                <div>06:13</div>
+                            </div>
+                        </div>
+                        <div class="jchg-scorll-item">
+                            <img class="item-img" src="https://tp.xiniuwangluo.cn/tlk/images/1yue25r.jpg" alt="">
+                            <div class="item-title">播出时间：2020年1月33日</div>
+                            <div class="bfxan">
+                                <img src="./img/bofangshipin@2x.png" alt="">
+                                <div>06:13</div>
+                            </div>
+                        </div>
+                        <div class="jchg-scorll-item">
+                            <img class="item-img" src="https://tp.xiniuwangluo.cn/tlk/images/1yue25r.jpg" alt="">
+                            <div class="item-title">播出时间：2020年1月33日</div>
+                            <div class="bfxan">
+                                <img src="./img/bofangshipin@2x.png" alt="">
+                                <div>06:13</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <ul class="lists">
+                    <img src="img/img-5@2x.png" id="title-img"/>
+                    <li class="list" style="display: none;">
+                        <select v-model="type">
+                            <!--<option value="1">优秀节目展演</option>-->
+                            <option value="2">少儿春晚暨元宵晚会</option>
+                            <!--<option value="3">少儿春晚元宵晚会</option>-->
+                        </select>
+                    </li>
+                    <li class="list">
+                        <input type="text" v-model="name" value="" placeholder="宝贝姓名"/>
+                    </li>
+                    <li class="list sex">
+                        <div class="list-title">宝贝性别</div>
+                        <div class="item" @click="rodioChange(1)">
+                            <img v-if="this.sex == 2" :src="this.sex_img" alt="">
+                            <img v-if="this.sex == 1" :src="this.sex_img_xz" alt="">
+                            <div>男孩</div>
+                        </div>
+                        <div class="item" @click="rodioChange(2)">
+                            <img v-if="this.sex == 1":src="this.sex_img" alt="">
+                            <img v-if="this.sex == 2":src="this.sex_img_xz" alt="">
+                            <div>女孩</div>
+                        </div>
+                    </li>
+                    <li class="list">
+                        <input type="number" v-model="age" value="" placeholder="年龄"/>
+                    </li>
+                    <li class="list">
+                        <input type="text" v-model="institution" value="" placeholder="机构/学校"/>
+                    </li>
+                    <li class="list">
+                        <input type="text" v-model="program_name" value="" placeholder="参演节目"/>
+                    </li>
+                    <li class="list">
+                        <input type="text" v-model="guardian" value="" placeholder="监护人"/>
+                    </li>
+                    <li class="list">
+                        <input type="number" v-model="mobile" value="" placeholder="监护人手机号"/>
+                    </li>
+                    <li class="list">
+                        <input type="number" v-model="qy" value="" placeholder="请输入区域"/>
+                    </li>
+                    <li class="list">
+                        <input type="text" v-model="addr" value="" placeholder="家庭住址"/>
+                    </li>
+                    <p class="z_file_btn_p">点击加号上传一寸证件照</p>
+                    <li class="list">
+                        <div class="z_file" onclick="getElementById('upfile').click()" n="0">
+                            <div class="z_file_btn">
+                                <img class="z_file_btn_img" src="./img/jia1.png" alt="123">
+                            </div>
+                            <input type="file" @change="updateImg($event)" id="upfile" accept="image/*" name="image" style="display: none;" id="upfile"/>
+                            <div class="pic-view"><img src="" alt=""/></div>
+                        </div>
+                    </li>
+                    <li class="list">
+                        <button type="submit" id="submit-btn" @click.stop="submitFn()"/>
+                        提交</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+</body>
+<script src="./js/flexible.js"></script>
+<script src="./js/flexible_css.js"></script>
+<script src="js/mui.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/cui.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                type: 2,
+                sex: 1,
+                name: '',
+                age: '',
+                institution: '',
+                program_name: '',
+                guardian: '',
+                mobile: '',
+                addr: '',
+                img: '',
+                audioSrc: "./music/q5QEAF5V0v-ARLYXAEySXJVXCVA414.mp3", //音乐
+                ys:4,
+                sf:'陕西省',
+                sm:'西安市',
+                qy:'',
+                sex_img:'./img/xiangbeiweixuanzhong@2x.png',
+                sex_img_xz:'./img/xingbeixuanzhong@2x.png',
+            },
+            created: function () {
+                var _this = this;
+                // 设置透明度
+                $(".swiper-container,.audio-menus").css({opacity: 1});
+                // 当用户从视频播放页面返回的时候，到第4个页面
+                this.ys = _this.getQueryVariable('ye')
+            },
+            mounted: function () {
+                var _this = this;
+                // 初始化上下翻页
+                _this.initBanner();
+                // 背景音乐设置
+                _this.initAudio();
+            },
+            updated: function (e) {
+            },
+            methods: {
+                // 获取 url 参数的值
+                getQueryVariable:function(variable){
+                    let query = window.location.search.substring(1);
+                    let vars = query.split("&");
+                    for (var i=0;i<vars.length;i++) {
+                            let pair = vars[i].split("=");
+                            if(pair[0] == variable){return pair[1];}
+                    }
+                    return(false);
+                },
+                // 播放视频
+                bfsp:function(){
+                    window.location='bfsp.html'
+                },
+                initBanner: function () { //初始化上下翻页
+                    var swiper = new Swiper('.swiper-container', {
+                        direction: 'vertical',
+                        initialSlide :this.ys,
+                    });
+                },
+                initAudio: function () { // 背景音乐设置
+                    var _this = this;
+                    // 创建audio播放音乐
+                    var newAudio = $("<audio class='audio' id='audio' hidden='hidden' controls autoplay='autoplay'  preload='auto'></audio>");
+                    newAudio.attr("src", _this.audioSrc);
+                    // 将音乐标签插入页面中
+                    $(document.body).append(newAudio);
+                    // 音乐控件
+                    var $audio = document.getElementById("audio"),
+                    // 页面音乐控制元素
+                    $audioBtn = document.querySelector(".audio-view");
+
+                    if(cui.isIOS()){
+                        wx.ready(function() {
+                            $audio.load();
+                            setTimeout(function(){
+                                $("audio .pause").trigger("click");
+                                $audio.play();
+                            },500);
+                        });
+                    }
+
+                    //右上角按钮控制音乐播放暂停
+                    $audioBtn.addEventListener("click", function () {
+                        var type = $(".audio-view").attr("type");
+                        if (type == true || type == "true") { //正在播放，点击后暂停
+                            $audio.pause();
+                            type = false;
+                            $audioBtn.style.animation = 'inherit';
+                        }
+                        else { //暂停中，点击开始播放
+                            $audio.play();
+                            type = true;
+                            $audioBtn.style.animation = 'rotate 1.5s forwards linear infinite';
+                        }
+                        $(".audio-view").attr({"type": type});
+                    });
+                },
+                rodioChange: function (index) { // 性別更改
+                    var _this = this;
+                    // console.log(parseInt(index))
+                    _this.sex =  parseInt(index)
+                },
+                updateImg: function (e) { //上传图片（返回全路径实现预览）
+                    var _this = this;
+                    var is = e.currentTarget;
+                    //创建FormData对象
+                    var data = new FormData();
+                    // console.log($(is)[0].files[0]);
+                    //为FormData对象添加数据
+                    $.each($(is)[0].files, function (i, file) {
+                        data.append('file', file);
+                        // console.log(file);
+                    });
+                    data.append('path', "uploads/images/");
+                    data.append('thumb', "0");
+                    // console.log(data);
+                    cui.showload({warp: ".lists", title: "图片上传中..", loading: {style: "ring"}});
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tlk/addtp.do',
+                        type: 'POST',
+                        data: data,
+                        cache: false,
+                        contentType: false, //不可缺
+                        processData: false, //不可缺
+                        success: function (ret) {
+                            cui.hideload();
+                            var ret = JSON.parse(ret);
+                            // console.log('后端返回图片地址',ret);
+                            if (ret.return_code == '1000') {
+                                $(".pic-view").css({opacity: 1});
+                                $(".pic-view img").attr({src: 'https://tp.xiniuwangluo.cn' + ret.url});
+                                _this.img = ret.url;
+                            }
+                            else {
+                                cui.toast({title: "图片获取失败"});
+                            }
+                        },
+                        error: function (ret, err) {
+                            cui.hideload();
+                        }
+                    });
+                },
+                submitFn: function () { //提交表单
+                    var _this = this;
+                    if (!cui.isDefine(_this.name)) {
+                        cui.toast({title: "请输入姓名"});
+                        return false;
+                    }
+                    if (!cui.isDefine(_this.age)) {
+                        cui.toast({title: "请输入年龄"});
+                        return false;
+                    }
+
+                    if (!cui.isDefine(_this.institution)) {
+                        cui.toast({title: "请输入隶属机构或学校"});
+                        return false;
+                    }
+
+                    if (!cui.isDefine(_this.program_name)) {
+                        cui.toast({title: "请输入节目名称"});
+                        return false;
+                    }
+                    if (!cui.isDefine(_this.guardian)) {
+                        cui.toast({title: "请输入监护人"});
+                        return false;
+                    }
+
+                    if (!cui.isDefine(_this.mobile)) {
+                        cui.toast({title: "请输入监护人手机号"});
+                        return false;
+                    }
+                    if (!cui.isDefine(_this.qy)) {
+                        cui.toast({title: "请输入区域"});
+                        return false;
+                    }
+
+                    if (!cui.isDefine(_this.addr)) {
+                        cui.toast({title: "请输入家庭住址"});
+                        return false;
+                    }
+                    if (!cui.isDefine(_this.img)) {
+                        cui.toast({title: "请上传照片"});
+                        return false;
+                    }
+                    cui.showload({warp: "#submit-btn", title: "提交中..", loading: {style: "ring"}});
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tpxt/addwybm.do',
+                        type: 'POST',
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        data: {
+                            xs_name: _this.name,
+                            sex: _this.sex,
+                            age: _this.age,
+                            school: _this.institution,
+                            name: _this.guardian,
+                            tel: _this.mobile,
+                            province:_this.sf,
+                            city:_this.sm,
+                            area:_this.qy,
+                            value: _this.addr,
+                            url: _this.img,
+                            jm_name: _this.program_name,
+                        },
+                        cache: false,
+                        success: function (ret) {
+                            var ret = JSON.parse(ret);
+                            console.log(ret)
+                            cui.hideload();
+                            if (ret.return_code == '1000') {
+                                cui.toast({title: "提交成功"},function(){
+                                window.sessionStorage.setItem('xs_name', JSON.stringify(ret.xs_name))
+                                window.sessionStorage.setItem('tel', JSON.stringify(ret.tel))
+                                window.location='lzs.html'
+                                });
+                            }
+                            else {
+                                cui.toast({title: ret.return_message});
+                            }
+                        },
+                        error: function (ret, err) {
+                            console.log(JSON.stringify(err));
+                            cui.hideload();
+                            cui.toast({title: "网络连接错误，请稍后再试"});
+                        }
+                    });
+                },
+            }
+        })
+    }
+</script>
+</html>

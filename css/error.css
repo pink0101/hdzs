@@ -1,0 +1,50 @@
+html{
+    height: 100%;
+}
+.bg{
+    background: url("../img/img-k.jpg") no-repeat;
+    background-size: 100% 100%;
+    width:100%;
+    height: 100%; 
+}
+
+.fh{
+    position: fixed;
+    top: 0.24rem;
+    left: 0.29rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fh-img{
+    width: 0.95rem;
+    height: 0.95rem;
+}
+.fh-name{
+    font-size:0.21rem;
+    font-family:Microsoft YaHei UI;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+}
+.ewm{
+    display: flex;
+    justify-content: center;
+}
+.sqewm{
+    margin-top:4.41rem;
+    width:4.55rem;
+    height:4.55rem;
+}
+.wz{
+    margin:0.31rem auto;
+    width:4.55rem;
+    height:3.09rem;
+    font-size:0.37rem;
+    font-family:Source Han Sans CN;
+    font-weight:400;
+    line-height:0.64rem;
+    color:rgba(214,16,24,1);
+    -webkit-text-stroke:1 rgba(0,0,0,0.00);
+    text-stroke:1 rgba(0,0,0,0.00);
+    opacity:1;
+}

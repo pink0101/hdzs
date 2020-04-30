@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <script src="./js/flexible.js"></script>
+    <script src="./js/flexible_css.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <link rel="stylesheet" href="./css/tjdd.css">
+    <link rel="stylesheet" type="text/css" href="css/cui.css"/>
+    <title>淘乐课</title>
+</head>
+<body class="bg" >
+    <div id="app">
+        <div class="item">
+            <input class="input" type="text" placeholder="收货人" v-model="shr_name">
+            <input class="input" type="text" placeholder="收货地址" v-model="shdz">
+            <input class="input" type="text" placeholder="联系方式" v-model="tel">
+            <div class="lx">
+                <div>类型</div>
+                <div v-cloak>{{this.lx}}</div>
+            </div>
+            <div class="lx">
+                <div>配送方式</div>
+                <div v-cloak>{{this.lx == '单品'? '货到付款':'邮寄'}}</div>
+            </div>
+            <div class="lx" v-if="this.lx != '单品'">
+                <div>快递费</div>
+                <div>包邮</div>
+            </div>
+            <div class="lx" v-if="this.lx != '单品'">
+                <div>实付金额</div>
+                <div class="je" v-cloak>￥{{this.money/100}}</div>
+            </div>
+            <div class="xdcg" hidden="true">
+                <div>下单时间：2020.03.03  13:56:48</div>
+                <div>订单编号：342646127365476365</div>
+            </div>
+            <div class="tjdd" @click="tjdd()">提交订单</div>
+        </div>
+        <div class="fhsy" @click="fhsy()">
+            <img src="./img/fanhuishouye@2x.png" alt="">
+            <div>返回首页</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/cui.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                cid:0,
+                shr_name:'', // 收货人
+                shdz:'', // 收货地址
+                tel:'', // 电话
+                lx:'',// 类型
+                money:0,// 金额
+            },
+            created:function(){
+                // 获取cid
+                this.cid = JSON.parse(sessionStorage.getItem('cid'))
+                this.lx = JSON.parse(sessionStorage.getItem('zslx'))
+                this.money = JSON.parse(sessionStorage.getItem('money'))
+                let openId = this.getQueryVariable('openid')
+                if(openId){
+                    window.sessionStorage.setItem('openid', JSON.stringify(openId))
+                }else{
+                    // 微信授权
+                    this.checkUserAuth()
+                }
+            },
+            methods:{
+                // 返回
+                fhsy:function(){
+                    window.location='index.html'
+                },
+                // 检查用户是否授权过
+                checkUserAuth() {
+                    let openId = JSON.parse(sessionStorage.getItem('openid'))
+                    if(!openId) {
+                    // 获取 code
+                    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2a60a12f70328c49&redirect_uri=https%3A%2F%2Ftp.xiniuwangluo.cn%2Ftpxt%2Fgetapplogin.do&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+                    }
+                },
+                // 获取 url 参数的值
+                getQueryVariable:function(variable){
+                    let query = window.location.search.substring(1);
+                    let vars = query.split("&");
+                    for (var i=0;i<vars.length;i++) {
+                            let pair = vars[i].split("=");
+                            if(pair[0] == variable){return pair[1];}
+                    }
+                    return(false);
+                },
+                tjdd:function() {
+                    var _this = this;
+                    if (!cui.isDefine(_this.shr_name)) {
+                        cui.toast({title: "请输入收货人"});
+                        return false;
+                    }
+                    if (!cui.isDefine(_this.shdz)) {
+                        cui.toast({title: "请输入收货地址"});
+                        return false;
+                    }
+                    if (!cui.isDefine(_this.tel)) {
+                        cui.toast({title: "请输入联系方式"});
+                        return false;
+                    }
+                    let openId = JSON.parse(sessionStorage.getItem('openid'))
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tpxt/addwywxxd.do',
+                        type: 'POST',
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        data: {
+                            cid:_this.cid,
+                            xs_name: _this.shr_name,
+                            name: _this.shdz,
+                            tel:_this.tel,
+                            type:1,
+                            openid:openId
+                        },
+                        cache: false,
+                        success: function (ret) {
+                            cui.hideload();
+                            var ret = JSON.parse(ret);
+                            console.log('1231',ret)
+                            if (ret.return_code == '1000') {
+                                // 支付环境
+                                if (typeof WeixinJSBridge == "undefined"){
+                                if( document.addEventListener ){
+                                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                                }else if (document.attachEvent){
+                                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                                }
+                                }else{
+                                onBridgeReady();
+                                }
+
+                                
+                                function onBridgeReady(){
+                                    WeixinJSBridge.invoke(
+                                        'getBrandWCPayRequest', {
+                                            "appId":"wx2a60a12f70328c49",     //公众号名称，由商户传入     
+                                            "timeStamp":ret.wexn.timestamp +"", // 时间戳
+                                            "nonceStr":ret.wexn.noncestr +"", // 随机字符串
+                                            "package":'prepay_id=' + ret.wexn.prepayid, // 统一支付接口返回的 prepay_id
+                                            "signType":"MD5",         //微信签名方式：     
+                                            "paySign":ret.wexn.sign, // 支付签名
+                                        },
+                                        function(res){     
+                                            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                                                console.log(res)
+                                            }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+                                        }
+                                    )
+                                }
+                            }
+                            else {
+                                cui.toast({title: ret.return_message});
+                            }
+                        },
+                        error: function (ret, err) {
+                            console.log(JSON.stringify(err));
+                            cui.hideload();
+                            cui.toast({title: "网络连接错误，请稍后再试"});
+                        }
+                    });
+                }
+            }
+        })
+    }
+</script>
+</html>

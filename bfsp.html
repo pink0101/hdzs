@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/flexible.js"></script>
+    <script src="./js/flexible_css.js"></script>
+    <link rel="stylesheet" href="./css/bfsp.css">
+    <title>淘乐课-2020年陕西省少儿春晚</title>
+</head>
+<body>
+    <div id="app">
+        <div class="spbf">
+            <video class="sp" src="" poster="https://tp.xiniuwangluo.cn/tlk/images/2020shaoerchunwan.png"></video>
+            <div class="sp-t">
+                <div class="sp-t-l">
+                    <div>2020年陕西省少儿春节联欢晚会</div>
+                    <div>视频时长：70:00</div>
+                </div>
+                <div class="sp-t-r">
+                    <div class="gks">
+                        <img src="./img/gks@2x.png" alt="">
+                        <div>1345</div>
+                    </div>
+                    <div class="fx">
+                        <img src="./img/fenxiang.png" alt="">
+                        <div>分享</div>
+                    </div>
+                </div>
+            </div>
+            <div class="spjs">
+                <div>节目介绍</div>
+                <div>2020年少儿春晚系列展播活动第一场于1月31日火热开启，共计播出 22个节目春报吉祥、 金鼠贺春、我长大了、阳光下成长、旅途、走进 梁家河、飞呀飞、九儿七彩画笔、你笑起来真好看、水果小将、鸿雁 草原小骑手、穿越时空的对话光辉岁月、Oh nanana、呼啦圈牛仔 小脚丫、What you want from me、跆拳梦小竹林、驼城鼓娃。</div>
+            </div>
+            <div class="gdsp">
+                <div class="gdsp-t">看节目</div>
+                <div class="gdsp-item">
+                    <div class="gd-item">
+                        <video class="gdsp-vid" src="" poster="https://tp.xiniuwangluo.cn/tlk/images/2020shaoerchunwan.png"></video>
+                        <div class="gdsp-name">播出时间：2020年1月31日</div>
+                        <div class="bfxan">
+                            <img src="./img/bofangshipin@2x.png" alt="">
+                            <div>06:13</div>
+                        </div>
+                    </div>
+                    <div class="gd-item">
+                        <video class="gdsp-vid" src="" poster="https://tp.xiniuwangluo.cn/tlk/images/2020shaoerchunwan.png"></video>
+                        <div class="gdsp-name">播出时间：2020年1月31日</div>
+                        <div class="bfxan">
+                            <img src="./img/bofangshipin@2x.png" alt="">
+                            <div>06:13</div>
+                        </div>
+                    </div>
+                    <div class="gd-item">
+                        <video class="gdsp-vid" src="" poster="https://tp.xiniuwangluo.cn/tlk/images/2020shaoerchunwan.png"></video>
+                        <div class="gdsp-name">播出时间：2020年1月31日</div>
+                        <div class="bfxan">
+                            <img src="./img/bofangshipin@2x.png" alt="">
+                            <div>06:13</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="./img/fanhui@2x.png" @click="fhsy()" class="fhsy" alt="">
+    </div>
+</body>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script>
+    window.onload = function () {
+        var vm = new Vue({
+            el: "#app",
+            data: {
+            },
+            methods:{
+                fhsy:function(){
+                    window.location='index.html?ye=3'
+                }
+            }
+        })
+        
+    }
+</script>
+</html>

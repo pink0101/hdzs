@@ -1,0 +1,96 @@
+html{
+    height: 100%;
+}
+.bg{
+    background: url("../img/bg.jpg") no-repeat;
+    background-size: cover;
+    width:100%;
+    height: 100%;
+}
+.top{
+    display: flex;
+    justify-content: center;
+}
+.xyy{
+    width: 4.43rem;
+    height: 0.65rem;
+    margin-top: 0.56rem;
+}
+.zs{
+    display: flex;
+    justify-content: center;
+}
+.zs-img{
+    width: 8.87rem;
+    height: 7.01rem;
+    margin-top: 1.53rem;
+}
+.lx{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0.72rem auto 0rem;
+    width: 7.16rem;
+}
+.item{
+    width: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.43rem;
+}
+.item-img{
+    width: 0.67rem;
+    height: 0.67rem;
+}
+.item-name{
+    margin-top: 0.11rem;
+    font-size:0.37rem;
+    font-family:Microsoft YaHei UI;
+    font-weight:bold;
+    color:rgba(204,204,204,1);
+}
+.item-je{
+    font-size:0.32rem;
+    font-family:Microsoft YaHei UI;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    margin-top: 0.07rem;
+}
+.active{
+    color:rgba(255,245,176,1);
+}
+.ljlq{
+    width:7.35rem;
+    height:1.28rem;
+    background:rgba(255,205,122,1);
+    box-shadow:0rem 0rem 0rem rgba(128,68,12,1);
+    opacity:1;
+    border-radius:1rem;
+    font-size:0.47rem;
+    font-family:Microsoft YaHei UI;
+    font-weight:bold;
+    color:rgba(51,51,51,1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.72rem auto 0;
+}
+.fh{
+    position: fixed;
+    top: 0.24rem;
+    left: 0.29rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fh-img{
+    width: 0.95rem;
+    height: 0.95rem;
+}
+.fh-name{
+    font-size:0.21rem;
+    font-family:Microsoft YaHei UI;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+}
